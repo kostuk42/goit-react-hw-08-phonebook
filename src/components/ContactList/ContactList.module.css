@@ -1,3 +1,14 @@
-.li {
-    list-style: none;
+.list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list li {
+    margin-bottom: 10px;
+}
+
+.list button {
+    margin-left: 10px;
+    padding: 5px 10px;
 }
