@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import ContactForm from "../ContactForm/ContactForm";
 import ContactList from "../ContactList/ContactList";
 import Filter from "../Filter/Filter";
-import PropTypes from 'prop-types';
 import styles from './App.module.css';
 
 class App extends Component {
@@ -83,23 +82,5 @@ class App extends Component {
 		);
 	}
 }
-
-
-App.propTypes = {
-	contacts: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.string.isRequired,
-			name: PropTypes.string.isRequired,
-			number: PropTypes.string.isRequired,
-		})
-	),
-	filter: PropTypes.string,
-	name: PropTypes.string,
-	number: PropTypes.string,
-	onAddContact: PropTypes.func,
-	onDeleteContact: PropTypes.func,
-	onChangeFilter: PropTypes.func,
-	getFilteredContacts: PropTypes.func,
-};
 
 export default App;
