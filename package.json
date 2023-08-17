@@ -1,14 +1,15 @@
 {
-  "name": "goit-react-hw-02-phonebook",
+  "name": "goit-react-hw-07-phonebook",
   "version": "0.1.0",
   "private": false,
-  "homepage": "http://kostuk42.github.io/goit-react-hw-06-phonebook",
+  "homepage": "http://kostuk42.github.io/goit-react-hw-07-phonebook",
   "dependencies": {
     "@redux-devtools/extension": "^3.2.5",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^1.4.0",
     "gh-pages": "^3.2.3",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
