@@ -11,4 +11,5 @@
 .list button {
     margin-left: 10px;
     padding: 5px 10px;
+    min-width: 100px;
 }
