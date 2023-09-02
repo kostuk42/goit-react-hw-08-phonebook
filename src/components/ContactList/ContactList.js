@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styles from './ContactList.module.css';
-import {useDispatch, useSelector} from "react-redux";
-import {getContacts, getDeletingId, getFilter} from "../../redux/selectors";
-import {deleteContact, fetchContacts} from "../../redux/operations";
+import {useSelector} from "react-redux";
+import {getFilter} from "../../redux/selectors";
+import {useDeleteContactMutation, useFetchAllQuery} from "../../redux/api";
 
 const getFilteredContacts = (filter, contacts) => {
     const normalizedFilter = filter.toLowerCase();
@@ -10,13 +10,11 @@ const getFilteredContacts = (filter, contacts) => {
 };
 
 const ContactList = () => {
-    const contacts = useSelector(getContacts);
+    const res = useFetchAllQuery();
+    const contacts = res.data || [];
+    const [deleteContact, {isLoading: isDeleting, data}] = useDeleteContactMutation();
+    const deletingId = data?.id;
     const filter = useSelector(getFilter);
-    const deletingId = useSelector(getDeletingId);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchContacts());
-    }, [dispatch]);
     const filteredContacts = getFilteredContacts(filter, contacts);
 
     return (
@@ -24,11 +22,11 @@ const ContactList = () => {
             <ul className={styles.list}>
                 {filteredContacts.map((contact) => (
                     <li key={contact.id}>
-                        {contact.name}: {contact.phone}
+                        {contact.name}: {contact.number}
                         <button type="button"
-                                disabled={+contact.id === +deletingId}
-                                onClick={() => dispatch(deleteContact(contact.id))}>
-                            {+contact.id === +deletingId ? 'Deleting...' : 'Delete'}
+                                disabled={isDeleting}
+                                onClick={() => deleteContact(contact.id)}>
+                            {deletingId === contact.id ? 'Deleting...' : 'Delete'}
                         </button>
                     </li>
                 ))}

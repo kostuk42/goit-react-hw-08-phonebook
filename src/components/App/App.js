@@ -1,20 +1,39 @@
-import React from 'react';
-import ContactForm from "../ContactForm/ContactForm";
-import ContactList from "../ContactList/ContactList";
-import Filter from "../Filter/Filter";
-import styles from './App.module.css';
-import {ToastContainer} from "react-toastify";
+import React, {lazy} from 'react';
+import {Route, Routes} from "react-router-dom";
+import {Layout} from "../Layout";
+import {RestrictedRoute} from "../RestrictedRoute";
+import {PrivateRoute} from "../PrivateRoute";
 
-const App = () => {
+const HomePage = lazy(() => import('../../pages/Home'));
+const RegisterPage = lazy(() => import('../../pages/Register/Register'));
+const LoginPage = lazy(() => import('../../pages/Login/Login'));
+const ContactsPage = lazy(() => import('../../pages/Contacts'));
+
+export const App = () => {
     return (
-        <div className={styles.container}>
-            <h1>Phonebook</h1>
-            <ContactForm/>
-            <h2>Contacts</h2>
-            <Filter/>
-            <ContactList/>
-            <ToastContainer/>
-        </div>
+        <Routes>
+            <Route path="/" element={<Layout/>}>
+                <Route index element={<HomePage/>}/>
+                <Route
+                    path="/register"
+                    element={
+                        <RestrictedRoute redirectTo="/contacts" component={<RegisterPage/>}/>
+                    }
+                />
+                <Route
+                    path="/login"
+                    element={
+                        <RestrictedRoute redirectTo="/contacts" component={<LoginPage/>}/>
+                    }
+                />
+                <Route
+                    path="/contacts"
+                    element={
+                        <PrivateRoute redirectTo="/login" component={<ContactsPage/>}/>
+                    }
+                />
+            </Route>
+        </Routes>
     );
 };
 

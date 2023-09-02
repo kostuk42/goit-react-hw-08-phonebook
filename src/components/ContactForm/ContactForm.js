@@ -1,24 +1,29 @@
 import React, {useRef} from 'react';
 import styles from './ContactForm.module.css';
 import {useDispatch, useSelector} from "react-redux";
-import {getContacts, getIsLoading} from "../../redux/selectors";
-import {addContact} from "../../redux/operations";
 import 'react-toastify/dist/ReactToastify.css';
+import {useAddContactMutation, useFetchAllQuery} from "../../redux/api";
+import {toast} from "react-toastify";
 
 const ContactForm = () => {
-    const contacts = useSelector(getContacts);
-    const isLoading = useSelector(getIsLoading);
-    const dispatch = useDispatch();
+    const {data} = useFetchAllQuery();
+    const [addContact, {isLoading: isAdding}] = useAddContactMutation();
+    const contacts = data || [];
+    // const contacts = useSelector(getContacts);
+    // const isLoading = useSelector(getIsLoading);
+    // const dispatch = useDispatch();
     const formRef = useRef();
     const handleSubmit = (event) => {
         event.preventDefault();
         const name = event.target[0].value;
-        const phone = event.target[1].value;
+        const number = event.target[1].value;
         const existingContact = contacts.find((contact) => contact.name.toLowerCase() === name.toLowerCase());
         if (existingContact) {
             alert(`${name} is already in contacts.`);
         } else {
-            dispatch(addContact({name, phone, formRef}));
+           addContact({name, number}).then(() => {
+               formRef.current.reset();
+           });
         }
     };
 
@@ -36,11 +41,11 @@ const ContactForm = () => {
                     Number:
                     <input
                         type="tel"
-                        name="phone"
+                        name="number"
                         required
                     />
                 </label>
-                <button type="submit" disabled={isLoading}>{isLoading ? 'Loading...' : 'Add contact'}</button>
+                <button type="submit" disabled={isAdding}>{isAdding ? 'Loading...' : 'Add contact'}</button>
             </form>
     );
 };
