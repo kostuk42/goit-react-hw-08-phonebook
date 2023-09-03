@@ -2,6 +2,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
     border-bottom: 1px solid #2a363b;
+    font-family: 'Roboto', sans-serif;
+    height: 70px;
+    background: #1665C0;
+    color: #fff;
 }

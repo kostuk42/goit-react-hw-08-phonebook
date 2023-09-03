@@ -4,6 +4,13 @@
   "private": false,
   "homepage": "http://kostuk42.github.io/goit-react-hw-08-phonebook",
   "dependencies": {
+    "@babel/runtime": "^7.22.11",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.14.7",
+    "@mui/material": "^5.14.7",
+    "@mui/styles": "^5.14.7",
     "@redux-devtools/extension": "^3.2.5",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.14.1",

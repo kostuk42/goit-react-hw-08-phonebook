@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './Filter.module.css';
 import {useDispatch, useSelector} from "react-redux";
 import {getFilter} from "../../redux/selectors";
 import {updateFilter} from "../../redux/filterSlice";
+import {TextField} from "@mui/material";
 
 const Filter = () => {
     const dispatch = useDispatch();
@@ -11,11 +11,16 @@ const Filter = () => {
         dispatch(updateFilter(value))
     }
     return (
-        <label className={styles.label}>
-            Find contacts by name:
-            <input type="text" value={filter} onChange={(event) => onChangeFilter(event.target.value)}/>
-        </label>
+        <TextField
+            label="Find contacts by name"
+            variant="outlined"
+            value={filter}
+            fullWidth={true}
+            onChange={(e) => onChangeFilter(e.target.value)}
+        />
     );
 };
 
 export default Filter;
+
+
