@@ -18,6 +18,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Copyright from "../../components/Copyright";
+import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
 
@@ -31,6 +32,8 @@ const Register = () => {
         const dataObj = Object.fromEntries(data.entries());
         const {email, password, firstName, lastName} = dataObj;
         const name = (firstName + ' ' + lastName).trim();
+        console.log("email, password, name")
+        console.log(email, password, name)
         if (email && password && name) {
             const res = await register({email, password, name})
             if (res.error) {
@@ -63,6 +66,7 @@ const Register = () => {
             }
 
         } else {
+            console.log("Please fill all fields!!")
             toast.error('Please fill all fields', {
                 position: "top-right",
                 autoClose: 2000,
@@ -157,6 +161,7 @@ const Register = () => {
                 </Box>
                 <Copyright sx={{ mt: 5 }} />
             </Container>
+            <ToastContainer />
           </ThemeProvider>
     );
 };
