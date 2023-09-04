@@ -1,5 +1,5 @@
 import React, {lazy} from 'react';
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, Navigate} from "react-router-dom";
 import {Layout} from "../Layout";
 import {RestrictedRoute} from "../RestrictedRoute";
 import {PrivateRoute} from "../PrivateRoute";
@@ -32,7 +32,7 @@ export const App = () => {
                         <PrivateRoute redirectTo="/login" component={<ContactsPage/>}/>
                     }
                 />
-                <Route path="*" element={<HomePage/>} />
+                <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
         </Routes>
     );
